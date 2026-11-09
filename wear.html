@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>ILL WEAR — Too ill for the society.</title>
+  <meta name="description" content="Ill Wear by The Illicitz. Breakin'-grounded streetwear. Poke the fabric, flip the tee, crack the vault.">
+  <meta name="theme-color" content="#e8e4d9">
+  <meta property="og:title" content="ILL WEAR — Too ill for the society.">
+  <meta property="og:image" content="media/still-02.jpg">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Rubik+Glitch&family=Rubik+Mono+One&family=Permanent+Marker&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="fonts/PlanetKosmos.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
+</head>
+<body class="shop">
+
+<canvas id="grain" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
+
+<header class="nav">
+  <a href="index.html" data-transition class="logo glitch" data-text="ILLICITZ">ILLICITZ</a>
+  <nav class="links">
+    <button id="openVault" class="hide-m">🔒 Vault</button>
+    <button id="openCart" class="pill">Cart (<span id="cartN">0</span>)</button>
+  </nav>
+</header>
+<div class="top-marq" aria-hidden="true"><span>TOO ILL FOR THE SOCIETY ✦ ILL WEAR ✦ DROP 001 ✦ SEATTLE, WA ✦ POKE THE FABRIC ✦ CRACK THE VAULT ✦ TOO ILL FOR THE SOCIETY ✦ ILL WEAR ✦ DROP 001 ✦ SEATTLE, WA ✦ POKE THE FABRIC ✦ CRACK THE VAULT ✦</span></div>
+
+<section class="stage" id="stage">
+  <div class="stage-bg"><h1>Ill<br>Wear</h1><p>TOO ILL FOR THE SOCIETY</p></div>
+  <canvas id="gl" aria-label="Interactive 3D tee. Move the cursor over the fabric to push it. Drag to spin."></canvas>
+  <div class="glitch-flash" id="flash"></div>
+
+  <div class="panel" id="panel">
+    <span class="tag" id="pTag">DROP 001</span>
+    <h2 id="pName">—</h2>
+    <div class="price" id="pPrice">$0</div>
+    <p class="blurb" id="pBlurb"></p>
+    <div class="row-l">Colour — <span id="pColor"></span></div>
+    <div class="sw" id="swColor"></div>
+    <div class="row-l">Size</div>
+    <div class="sw" id="swSize"></div>
+    <button class="add" id="addBtn"><span>Add to cart</span><span>＋</span></button>
+  </div>
+
+  <div class="side">
+    <button class="circ" id="prev" aria-label="Previous product">←</button>
+    <button class="circ txt" id="flip" aria-label="Flip the tee">Flip</button>
+    <button class="circ" id="next" aria-label="Next product">→</button>
+  </div>
+  <p class="hint">Hover = push the fabric<br>Drag = spin it</p>
+
+  <div class="strip" id="strip"></div>
+</section>
+
+<section class="lookbook">
+  <h2>On the<br><em>floor.</em></h2>
+  <div class="lb-grid" id="lb"></div>
+  <div class="vault-cta">
+    <div>
+      <h3>THE VAULT</h3>
+      <p>Eight letters. One lock. Freeze each spinning letter to spell <b>ILLICITZ</b> and crack it open for a code.</p>
+    </div>
+    <button class="btn" id="openVault2">Try to crack it →</button>
+  </div>
+  <p class="manifest-note">Ill Wear is a project of The Illicitz · Seattle, WA · <a href="https://www.instagram.com/theillicitz/" target="_blank" rel="noopener" style="color:var(--acid)">@theillicitz</a> · <a href="index.html" data-transition style="color:var(--acid)">← Back to the crew</a></p>
+</section>
+
+<!-- CART -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Cart">
+  <header><span>Cart</span><button id="closeCart" aria-label="Close cart">✕</button></header>
+  <div class="d-items" id="dItems"></div>
+  <div class="d-foot">
+    <div class="d-code" id="dCode"></div>
+    <div class="t"><span>Total</span><span id="dTotal">$0</span></div>
+    <button class="add" id="checkout"><span>Reserve my drop</span><span>→</span></button>
+    <p class="d-msg" id="dMsg"></p>
+  </div>
+</aside>
+<div class="toast" id="toast"></div>
+
+<!-- VAULT GAME -->
+<div id="vault" role="dialog" aria-label="The Vault — lock game">
+  <div class="v-bgword" aria-hidden="true"><span>ILLICITZ ILLICITZ ILLICITZ</span><span>ILLICITZ ILLICITZ ILLICITZ</span><span>ILLICITZ ILLICITZ ILLICITZ</span><span>ILLICITZ ILLICITZ ILLICITZ</span></div>
+  <div class="v-scan"></div>
+  <div class="v-top">The Vault / Drop 001</div>
+  <button class="v-close">Esc ✕</button>
+  <div class="v-lock">
+    <div class="v-shackle"></div>
+    <div class="v-body">
+      <div class="v-title"><span>Sec.lvl // ILLICITZ</span><span>8 digits</span></div>
+      <div class="v-slots"></div>
+      <div class="v-status">Freeze each letter. Spell it. Crack it.</div>
+    </div>
+  </div>
+  <button class="v-lockbtn">LOCK</button>
+  <div class="v-keys">Space / Enter / Tap = freeze the letter</div>
+  <div class="v-win">
+    <h2>CRACKED.</h2>
+    <p>You are too ill for this world. Your code:</p>
+    <div class="code">—</div>
+    <p>15% off — it's applied to your cart automatically.</p>
+    <div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;justify-content:center">
+      <button class="btn" data-close>Back to the shop</button>
+      <button class="btn" data-again style="background:transparent;color:var(--acid);border:2px solid var(--acid)">Again</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="js/wear.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>ILLICITZ — Too ill for this world.</title>
+  <meta name="description" content="The Illicitz — a creative collective rooted in breakin' culture. Seattle, WA. Slayin since 2025. Home of Ill Wear.">
+  <meta name="theme-color" content="#070707">
+  <meta property="og:title" content="ILLICITZ — Too ill for this world.">
+  <meta property="og:description" content="Creative collective rooted in breakin' culture. Seattle, WA. Home of Ill Wear.">
+  <meta property="og:image" content="media/still-01.jpg">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="fonts/PlanetKosmos.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="home is-loading">
+
+<canvas id="grain" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
+
+<!-- LOADER: the image fills the word -->
+<div id="loader" aria-live="polite">
+  <div class="ld-moto">The Illicitz / Seattle, WA</div>
+  <div class="ld-wrap" id="ldWrap">
+    <div class="ld-word outline">ILLICITZ</div>
+    <div class="ld-word fill" id="ldFill">ILLICITZ</div>
+  </div>
+  <div class="ld-meta"><span>Loading the cypher…</span><span class="ld-count" id="ldCount">000</span></div>
+</div>
+
+<header class="nav">
+  <a href="#top" class="logo glitch" data-text="ILLICITZ" aria-label="Illicitz home">ILLICITZ</a>
+  <nav class="links">
+    <a href="https://www.instagram.com/theillicitz/" target="_blank" rel="noopener" class="hide-m">Instagram</a>
+    <a href="wear.html" data-transition class="pill">Ill Wear ↗</a>
+  </nav>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg" id="heroBg"><div class="media" data-m="0" data-pos="50% 40%"></div></div>
+    <div class="hero-shade"></div>
+    <div class="ticker" aria-hidden="true"><span>Breakin' culture ✦ Seattle, WA ✦ Slayin since 2025 ✦ Vol. 1 ✦ Too ill for this world ✦ Toprock · Downrock · Power · Freeze ✦ Breakin' culture ✦ Seattle, WA ✦ Slayin since 2025 ✦ Vol. 1 ✦ Too ill for this world ✦ Toprock · Downrock · Power · Freeze ✦</span></div>
+    <div class="scroll-cue">Scroll</div>
+    <h1 class="hero-word glitch" id="heroWord" data-text="ILLICITZ" data-auto>ILLICITZ</h1>
+    <div class="hero-row">
+      <p class="hero-moto">Too ill for <b>this world.</b></p>
+      <p class="hero-sub">Creative collective grounded in breakin'. Dance · Media · Wear.</p>
+    </div>
+  </section>
+
+  <!-- 01 EXPAND -->
+  <section class="scene s-expand" id="sExpand" style="height:340vh">
+    <div class="pin">
+      <div class="ex-text ex-l" id="exL">Break</div>
+      <div class="ex-text ex-r" id="exR">in'</div>
+      <div class="ex-frame" id="exFrame">
+        <div class="media" data-m="2" data-pos="50% 50%" id="exMedia"></div>
+        <div class="ex-cap" id="exCap">
+          <div><span class="kick">01 — The culture</span><h2>Round after round.</h2></div>
+          <p>Vol. 1 · Seattle · Hosted by The Illicitz</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 COLUMNS -->
+  <section class="scene s-cols" id="sCols" style="height:380vh">
+    <div class="pin">
+      <div class="cols" id="cols"></div>
+      <div class="cols-title"><h2>Not a trend.<br>A language.</h2><p>Toprock ✦ Downrock ✦ Power ✦ Freeze</p></div>
+    </div>
+  </section>
+
+  <!-- 03 REEL -->
+  <section class="scene s-reel" id="sReel" style="height:520vh">
+    <div class="pin">
+      <div class="reel-bg" id="reelBg">VOL.1 — SLAYIN SINCE 2025 — VOL.1 — SLAYIN SINCE 2025</div>
+      <div class="reel-track" id="reelTrack"></div>
+      <div class="reel-hint">02 — Frames from the floor →</div>
+    </div>
+  </section>
+
+  <!-- 04 MANIFESTO -->
+  <section class="scene s-mani" id="sMani" style="height:360vh">
+    <div class="pin">
+      <div class="mani-bg" id="maniBg"><div class="media" data-m="0" data-pos="50% 50%"></div></div>
+      <p class="mani" id="mani"></p>
+      <div class="mani-tag">03 — Manifesto<br>The Illicitz / Seattle, WA</div>
+    </div>
+  </section>
+
+  <!-- 05 FINALE -->
+  <section class="scene s-fin" id="sFin" style="height:320vh">
+    <div class="pin">
+      <div class="fin-moto" id="finMoto" aria-label="Too ill for this world.">
+        <span><i>Too ill</i></span>
+        <span><i class="o">for this</i></span>
+        <span><i class="a">world.</i></span>
+      </div>
+      <a href="wear.html" data-transition class="shop-badge" id="shopBadge" aria-label="Enter Ill Wear shop" data-cursor="big">
+        <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
+          <defs><path id="circ" d="M100,100 m-86,0 a86,86 0 1,1 172,0 a86,86 0 1,1 -172,0"/></defs>
+          <text><textPath href="#circ" startOffset="0">ILL WEAR ✦ TOO ILL FOR THE SOCIETY ✦ ILL WEAR ✦ TOO ILL FOR THE SOCIETY ✦</textPath></text>
+        </svg>
+        <div class="disc"></div>
+        <svg class="bag" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+          <path d="M20 8 L8 18 L14 26 L20 22 V56 H44 V22 L50 26 L56 18 L44 8 C42 14 22 14 20 8 Z" fill="currentColor"/>
+        </svg>
+      </a>
+      <div class="shop-label" id="shopLabel"><b>Ill Wear</b>Enter the shop</div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>© 2025–2026 The Illicitz · Seattle, WA</span>
+  <a href="https://www.instagram.com/theillicitz/" target="_blank" rel="noopener">@theillicitz</a>
+  <a href="wear.html" data-transition>Ill Wear →</a>
+</footer>
+<div class="prog" id="prog">000%</div>
+
+<script type="module" src="js/home.js"></script>
+<noscript><p style="position:fixed;inset:0;z-index:5000;background:#000;color:#fff;padding:40px">ILLICITZ needs JavaScript. Instagram: @theillicitz</p></noscript>
+</body>
+</html>
