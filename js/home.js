@@ -49,9 +49,8 @@ for (let i = 0; i < frameCount; i++) {
 
 /* ───────── generated: manifesto words ───────── */
 const maniText = [
-  "We don't dance for the room.", "We dance for the cypher.",
-  "[Toprock.] [Downrock.] [Power.] [Freeze.]",
-  "Every round is a signature.", "Slayin' since 2025.",
+  'Creating [cypher,] [art] and [movement.]',
+  'Grounded to [Culture.]',
 ];
 const maniEl = $('#mani');
 maniText.join(' ').split(/\s+/).forEach((w) => {
@@ -71,7 +70,9 @@ const loader = $('#loader');
 const ldFill = $('#ldFill');
 const ldCount = $('#ldCount');
 const ldWrap = $('#ldWrap');
-ldFill.style.backgroundImage = `url(${MEDIA[1].poster || MEDIA[1].src})`;
+const ldImg = `url(${MEDIA[0].poster || MEDIA[0].src})`;
+ldFill.style.backgroundImage = ldImg;
+document.getElementById('ldFull').style.backgroundImage = ldImg;
 
 function preload(src) {
   return new Promise((res) => { const i = new Image(); i.onload = i.onerror = res; i.src = src; });
@@ -100,16 +101,22 @@ async function runLoader() {
       requestAnimationFrame(step);
     })();
   });
-  // zoom through the word → reveals hero
+  // push in on the word, then cross-fade to the same picture at full-screen size.
+  // (Scaling the text ~30x would blow a 1200px photo up into pixels, so we only zoom a little.)
   await new Promise((r) => setTimeout(r, 250));
-  ldWrap.style.transition = 'transform 1.25s cubic-bezier(.75,0,.2,1)';
-  ldWrap.style.transform = 'scale(34)';
+  const ldFull = document.getElementById('ldFull');
+  ldWrap.style.transition = 'transform 1.2s cubic-bezier(.6,0,.2,1), opacity .7s .5s';
+  ldWrap.style.transform = 'scale(2.6)';
+  ldWrap.style.opacity = 0;
+  ldFull.style.transition = 'opacity .9s .15s ease-out, transform 1.6s ease-out';
+  ldFull.style.opacity = 1; ldFull.style.transform = 'scale(1.0)';
   loader.querySelector('.ld-meta').style.opacity = 0;
   loader.querySelector('.ld-moto').style.opacity = 0;
-  loader.style.transition = 'opacity .5s .85s';
-  loader.style.opacity = 0;
   document.body.classList.remove('is-loading');
-  setTimeout(() => { loader.style.display = 'none'; }, 1500);
+  await new Promise((r) => setTimeout(r, 1000));
+  loader.style.transition = 'opacity .7s';
+  loader.style.opacity = 0;
+  setTimeout(() => { loader.style.display = 'none'; }, 800);
   heroIntro();
 }
 

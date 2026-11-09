@@ -187,6 +187,22 @@ export function initTicker(el, { speed = 55 } = {}) {
   };
   el.addEventListener('pointerup', up);
   el.addEventListener('pointercancel', up);
+  // hovering the banner: the mouse wheel scratches (and does NOT scroll the page).
+  // Leave the banner and the wheel scrolls the page normally again.
+  let wheelEnd = null, wheelOn = false, wheelLast = 0;
+  el.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 400 : 1;
+    const d = (Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY) * unit;
+    const dx = -d * 1.6;
+    const now = performance.now(), dt = Math.max(8, Math.min(60, now - (wheelLast || now - 16)));
+    wheelLast = now;
+    if (!dragging) { x += dx; vel = (dx / dt) * 1000; }
+    if (!wheelOn) { wheelOn = true; el.classList.add('grab'); audio.scratchStart(); }
+    audio.scratchMove(dx, dt);
+    clearTimeout(wheelEnd);
+    wheelEnd = setTimeout(() => { wheelOn = false; wheelLast = 0; el.classList.remove('grab'); audio.scratchEnd(); }, 140);
+  }, { passive: false });
   let last = performance.now();
   (function loop(t) {
     const dt = Math.min(0.05, (t - last) / 1000); last = t;
