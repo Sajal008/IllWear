@@ -1,7 +1,11 @@
 import { MEDIA, CAPTIONS, mountMedia } from './media.js';
 import { initShared, clamp, lerp, seg, ease, easeOut } from './shared.js';
+import { initTicker, bindSoundButton, armFirstGesture } from './audio.js';
 
 initShared();
+bindSoundButton(document.getElementById('snd'));
+armFirstGesture();
+initTicker(document.getElementById('ticker'));
 
 const $ = (s, r = document) => r.querySelector(s);
 const reduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -33,7 +37,7 @@ const frameCount = Math.max(6, MEDIA.length * 2);
 for (let i = 0; i < frameCount; i++) {
   const f = document.createElement('figure');
   const m = MEDIA[i % MEDIA.length];
-  f.className = 'frame' + (m.src.includes('02') || (i % 4 === 1) ? ' tall' : '');
+  f.className = 'frame' + (m.portrait ? ' tall' : '');
   const box = document.createElement('div');
   mountMedia(box, m, crops[(i * 2) % crops.length]);
   const cap = CAPTIONS[i % CAPTIONS.length];
@@ -67,7 +71,7 @@ const loader = $('#loader');
 const ldFill = $('#ldFill');
 const ldCount = $('#ldCount');
 const ldWrap = $('#ldWrap');
-ldFill.style.backgroundImage = `url(${MEDIA[0].poster || MEDIA[0].src})`;
+ldFill.style.backgroundImage = `url(${MEDIA[1].poster || MEDIA[1].src})`;
 
 function preload(src) {
   return new Promise((res) => { const i = new Image(); i.onload = i.onerror = res; i.src = src; });
@@ -154,6 +158,11 @@ const reelBg = $('#reelBg');
 const maniBg = $('#maniBg');
 const finMoto = $('#finMoto'), shopBadge = $('#shopBadge'), shopLabel = $('#shopLabel');
 const colTitle = $('.cols-title');
+// a portrait photo ends as a full-height tall frame instead of being stretched across the screen
+const exItem = MEDIA[+$('#exMedia').dataset.m % MEDIA.length];
+let exEndX = 0;
+function calcEx() { exEndX = exItem.portrait && exItem.ar ? Math.max(0, (1 - (vh * exItem.ar) / vw) / 2 * 100) : 0; }
+calcEx(); addEventListener('resize', calcEx);
 
 function P(s) { return clamp((cur - s.top) / s.h); }
 function near(s) { return cur > s.top - vh * 1.2 && cur < s.top + s.h + vh * 1.2; }
@@ -172,9 +181,9 @@ function update() {
   if (near(s)) {
     const p = P(s);
     const e = ease(seg(p, 0.04, 0.72));
-    const ix = lerp(37, 0, e), iy = lerp(23, 0, e);
+    const ix = lerp(37, exEndX, e), iy = lerp(23, 0, e);
     exFrame.style.clipPath = `inset(${iy}% ${ix}% ${iy}% ${ix}% round ${lerp(18, 0, e)}px)`;
-    if (exMedia) exMedia.style.transform = `scale(${lerp(1.5, 1.04, e)})`;
+    if (exMedia) exMedia.style.transform = `scale(${lerp(1.5, 1.0, e)})`;
     const x = e * 78;
     exL.style.transform = `translate3d(${-x}vw,-50%,0)`;
     exR.style.transform = `translate3d(${x}vw,-50%,0)`;

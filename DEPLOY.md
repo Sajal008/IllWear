@@ -3,10 +3,10 @@
 The site files live in the root of this repo (`index.html`, `wear.html`, `css/`, `js/`, `media/`, `fonts/`, `vendor/`, `CNAME`).
 
 ## 1. Put it on GitHub
-1. On github.com → **New repository** → name it e.g. `illicitz-site` → **Public** (Pages on free plans needs public) → create it **empty** (no README).
+1. On github.com → **New repository** → name it e.g. `IllWear` → **Public** (Pages on free plans needs public) → create it **empty** (no README).
 2. In this folder:
    ```bash
-   git remote add origin https://github.com/<YOUR-USERNAME>/illicitz-site.git
+   git remote add origin https://github.com/<YOUR-USERNAME>/IllWear.git
    git push -u origin main
    ```
 

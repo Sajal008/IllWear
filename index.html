@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#070707">
   <meta property="og:title" content="ILLICITZ — Too ill for this world.">
   <meta property="og:description" content="Creative collective rooted in breakin' culture. Seattle, WA. Home of Ill Wear.">
-  <meta property="og:image" content="media/still-01.jpg">
+  <meta property="og:image" content="media/moment-air.jpg">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,6 +34,7 @@
 <header class="nav">
   <a href="#top" class="logo glitch" data-text="ILLICITZ" aria-label="Illicitz home">ILLICITZ</a>
   <nav class="links">
+    <button class="snd" id="snd" data-no-autoplay aria-pressed="false">♪ Sound <span class="snd-state">OFF</span></button>
     <a href="https://www.instagram.com/theillicitz/" target="_blank" rel="noopener" class="hide-m">Instagram</a>
     <a href="wear.html" data-transition class="pill">Ill Wear ↗</a>
   </nav>
@@ -44,7 +45,8 @@
   <section class="hero" id="hero">
     <div class="hero-bg" id="heroBg"><div class="media" data-m="0" data-pos="50% 40%"></div></div>
     <div class="hero-shade"></div>
-    <div class="ticker" aria-hidden="true"><span>Breakin' culture ✦ Seattle, WA ✦ Slayin since 2025 ✦ Vol. 1 ✦ Too ill for this world ✦ Toprock · Downrock · Power · Freeze ✦ Breakin' culture ✦ Seattle, WA ✦ Slayin since 2025 ✦ Vol. 1 ✦ Too ill for this world ✦ Toprock · Downrock · Power · Freeze ✦</span></div>
+    <div class="ticker" id="ticker" role="img" aria-label="Draggable banner. Drag it to scratch the beat."><div class="tk-track"><span class="tk-seg">Too ill for this world ✦ Toprock · Downrock · Power · Freeze ✦ Breakin' culture ✦ Seattle, WA ✦ Slayin since 2025 ✦ Vol. 1 ✦&nbsp;</span></div></div>
+    <div class="tk-hint">↔ Drag the banner to scratch</div>
     <div class="scroll-cue">Scroll</div>
     <h1 class="hero-word glitch" id="heroWord" data-text="ILLICITZ" data-auto>ILLICITZ</h1>
     <div class="hero-row">
@@ -59,10 +61,10 @@
       <div class="ex-text ex-l" id="exL">Break</div>
       <div class="ex-text ex-r" id="exR">in'</div>
       <div class="ex-frame" id="exFrame">
-        <div class="media" data-m="2" data-pos="50% 50%" id="exMedia"></div>
+        <div class="media" data-m="1" data-pos="50% 28%" id="exMedia"></div>
         <div class="ex-cap" id="exCap">
           <div><span class="kick">01 — The culture</span><h2>Round after round.</h2></div>
-          <p>Vol. 1 · Seattle · Hosted by The Illicitz</p>
+          <p>Seattle, WA · The Illicitz</p>
         </div>
       </div>
     </div>
@@ -88,7 +90,7 @@
   <!-- 04 MANIFESTO -->
   <section class="scene s-mani" id="sMani" style="height:360vh">
     <div class="pin">
-      <div class="mani-bg" id="maniBg"><div class="media" data-m="0" data-pos="50% 50%"></div></div>
+      <div class="mani-bg" id="maniBg"><div class="media" data-m="3" data-pos="50% 50%"></div></div>
       <p class="mani" id="mani"></p>
       <div class="mani-tag">03 — Manifesto<br>The Illicitz / Seattle, WA</div>
     </div>
