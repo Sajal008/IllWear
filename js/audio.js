@@ -187,26 +187,32 @@ export function initTicker(el, { speed = 55 } = {}) {
   };
   el.addEventListener('pointerup', up);
   el.addEventListener('pointercancel', up);
-  // hovering the banner: the mouse wheel scratches (and does NOT scroll the page).
-  // Leave the banner and the wheel scrolls the page normally again.
-  let wheelEnd = null, wheelOn = false, wheelLast = 0;
+  // Hovering the banner: the wheel scratches (and does NOT scroll the page). Leave the banner
+  // and the wheel scrolls the page normally again.
+  // Each wheel notch is a small PUSH on a "platter" with friction, so speed builds smoothly as you
+  // keep scrolling and eases out when you stop — much easier to control than 1 notch = 1 jump.
+  let wv = 0, wheelOn = false, wheelIdle = 0;
+  const WMAX = 520;                                   // px/s cap while scratching with the wheel
   el.addEventListener('wheel', (e) => {
     e.preventDefault();
     const unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 400 : 1;
-    const d = (Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY) * unit;
-    const dx = -d * 1.6;
-    const now = performance.now(), dt = Math.max(8, Math.min(60, now - (wheelLast || now - 16)));
-    wheelLast = now;
-    if (!dragging) { x += dx; vel = (dx / dt) * 1000; }
+    const raw = (Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY) * unit;
+    const push = Math.max(-60, Math.min(60, raw)) * -1.7;   // a notch (~100) = a ~100 px/s nudge
+    wv = Math.max(-WMAX, Math.min(WMAX, wv + push));
+    wheelIdle = 0;
     if (!wheelOn) { wheelOn = true; el.classList.add('grab'); audio.scratchStart(); }
-    audio.scratchMove(dx, dt);
-    clearTimeout(wheelEnd);
-    wheelEnd = setTimeout(() => { wheelOn = false; wheelLast = 0; el.classList.remove('grab'); audio.scratchEnd(); }, 140);
   }, { passive: false });
   let last = performance.now();
   (function loop(t) {
     const dt = Math.min(0.05, (t - last) / 1000); last = t;
-    if (!dragging) { vel += (base - vel) * Math.min(1, dt * 2.2); x += vel * dt; }
+    if (wheelOn && !dragging) {
+      const dx = wv * dt;
+      x += dx; vel = wv;
+      audio.scratchMove(dx, Math.max(4, dt * 1000));
+      wv *= Math.pow(0.0025, dt);                      // friction: ~0.3 s to stop
+      wheelIdle += dt;
+      if (Math.abs(wv) < 12 && wheelIdle > 0.12) { wv = 0; wheelOn = false; el.classList.remove('grab'); audio.scratchEnd(); }
+    } else if (!dragging) { vel += (base - vel) * Math.min(1, dt * 2.2); x += vel * dt; }
     x = ((x % w) - w) % w;
     track.style.transform = `translate3d(${x}px,0,0)`;
     requestAnimationFrame(loop);
