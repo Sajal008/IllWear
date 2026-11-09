@@ -100,7 +100,7 @@ PRODUCTS.forEach((p, i) => {
 document.querySelector('[data-open]').addEventListener('click', (e) => openProduct(e.currentTarget.dataset.open));
 
 /* ───────── lookbook ───────── */
-const LOOK = ['crew-5.jpg', 'crew-wide.jpg', 'moment-cypher.jpg', 'crew-3.jpg', 'solo-a.jpg', 'solo-b.jpg', 'solo-c.jpg', 'moment-air.jpg'];
+const LOOK = ['crew-5.jpg', 'crew-wide.jpg', 'moment-cypher.jpg', 'street-freeze.jpg', 'crew-3.jpg', 'solo-a.jpg', 'solo-b.jpg', 'solo-c.jpg', 'moment-air.jpg'];
 LOOK.forEach((f) => {
   const b = document.createElement('button');
   b.innerHTML = `<img src="${media(f)}" alt="" loading="lazy">`;

@@ -11,6 +11,7 @@ export const MEDIA = [
   { type: 'image', src: 'media/crew-5.jpg', alt: 'Five members of the crew in front of graffiti', portrait: true, ar: 672 / 865 },
   { type: 'image', src: 'media/crew-wide.jpg', alt: 'The crew posed up in a dark hallway' },
   { type: 'image', src: 'media/moment-air.jpg', alt: 'A breaker frozen mid-air above the checkerboard floor' },
+  { type: 'image', src: 'media/street-freeze.jpg', alt: 'A breaker mid-freeze on a street lined with red flags' },
   { type: 'image', src: 'media/solo-a.jpg', alt: 'Floor freeze in a fisheye lens, crowd blurred behind' },
   { type: 'image', src: 'media/crew-3.jpg', alt: 'Three members posing outside a graffiti doorway', portrait: true, ar: 1180 / 1572 },
   { type: 'image', src: 'media/solo-d.jpg', alt: 'Black and white portrait with the Illicitz hand sign', portrait: true, ar: 818 / 1068 },

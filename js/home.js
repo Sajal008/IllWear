@@ -70,9 +70,9 @@ const loader = $('#loader');
 const ldFill = $('#ldFill');
 const ldCount = $('#ldCount');
 const ldWrap = $('#ldWrap');
-const ldImg = `url(${MEDIA[0].poster || MEDIA[0].src})`;
-ldFill.style.backgroundImage = ldImg;
-document.getElementById('ldFull').style.backgroundImage = ldImg;
+// the crew photo fills the word; the main (hero) photo is what it cross-fades into
+ldFill.style.backgroundImage = `url(${MEDIA[1].poster || MEDIA[1].src})`;
+document.getElementById('ldFull').style.backgroundImage = `url(${MEDIA[0].poster || MEDIA[0].src})`;
 
 function preload(src) {
   return new Promise((res) => { const i = new Image(); i.onload = i.onerror = res; i.src = src; });
